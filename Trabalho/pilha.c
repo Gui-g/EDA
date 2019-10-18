@@ -23,7 +23,8 @@ int empilha(info *reg, struct pilha *pil) {
     if (aux != NULL) {
         memcpy(&(aux->dados), reg, sizeof(info));
         aux->abaixo = pil->topo;
-        pil->topo->acima = aux;
+        if(pil->topo)
+            pil->topo->acima = aux;
         pil->topo = aux;
         (pil->tamPilha)++;
         return 1;

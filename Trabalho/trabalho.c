@@ -60,45 +60,42 @@ void PrintMatriz(int *matriz, descMatriz *descritor) {
 void RotularMatriz(int **matriz, descMatriz *descritor, int *label) {
     int i, j;
     info dados;
-    printf("rotulando\n");
     PrintMatriz(*matriz, descritor);
     for (i = 0; i < descritor->row; i++) {
         for (j = 0; j < descritor->col; j++) {
-            printf("%d\n", *(*(matriz) + i * descritor->col + j));
             if (*(*(matriz) + i * descritor->col + j) == 1) {
                 dados.x = i;
                 dados.y = j;
-                Rotula(matriz, descritor, dados, label);
+                Rotula(matriz, descritor, &dados, label);
                 (*label)++;
             }
         }
     }
 }
 
-void Rotula(int **matriz, descMatriz *descritor, info dados, int *label) {
-    int i = dados.x;
-    int j = dados.y;
+void Rotula(int **matriz, descMatriz *descritor, info *dados, int *label) {
+    int i = dados->x;
+    int j = dados->y;
     info aux;
-    struct pilha descritorPilha;
+    struct pilha *descritorPilha;
+    descritorPilha = cria();
 
-    RotulaDireita(matriz, descritor, dados, label, &descritorPilha);
-    printf("rotulando objeto");
+    RotulaDireita(matriz, descritor, dados, label, descritorPilha);
 
-    while (busca(&aux, &descritorPilha) == 1) {
-        desempilha(&aux, &descritorPilha);
+    while (busca(&aux, descritorPilha) == 1) {
+        desempilha(&aux, descritorPilha);
         if (*(*(matriz) + i * descritor->col + j) == *label) {
             if (*(*(matriz) + (i + 1) * descritor->col + j) == 1)
-                RotulaEsquerda(matriz, descritor, dados, label, &descritorPilha);
+                RotulaEsquerda(matriz, descritor, dados, label, descritorPilha);
         }
     }
 }
 
-void RotulaDireita(int **matriz, descMatriz *descritor, info dados, int *label,
+void RotulaDireita(int **matriz, descMatriz *descritor, info *dados, int *label,
                    struct pilha *descritorPilha) {
-    int i = dados.x;
-    int j = dados.y;
+    int i = dados->x;
+    int j = dados->y;
     info aux;
-
     while (*(*(matriz) + i * descritor->col + j) == 1) {
         aux.x = i;
         aux.y = j;
@@ -108,17 +105,16 @@ void RotulaDireita(int **matriz, descMatriz *descritor, info dados, int *label,
     }
 }
 
-void RotulaEsquerda(int **matriz, descMatriz *descritor, info dados, int *label,
+void RotulaEsquerda(int **matriz, descMatriz *descritor, info *dados, int *label,
                     struct pilha *descritorPilha) {
-    int i = dados.x;
-    int j = dados.y;
+    int i = dados->x;
+    int j = dados->y;
     info aux;
-
     while (*(matriz[i * descritor->col + j]) == 1) {
         aux.x = i;
         aux.y = j;
         empilha(&aux, descritorPilha);
         j--;
-        *(matriz[i * descritor->col + j]) = *label;
+        (*(matriz))[i * descritor->col + j] = *label;
     }
 }

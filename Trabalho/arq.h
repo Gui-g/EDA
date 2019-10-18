@@ -29,10 +29,10 @@ void inicializaDescritor(descMatriz **descritor);
 int *CriarMatriz(FILE *arquivo_entrada, descMatriz **descritor);
 void PrintMatriz(int *matriz, descMatriz *descritor);
 void RotularMatriz(int **matriz, descMatriz *descritor, int *label);
-void Rotula(int **matriz, descMatriz *descritor, info dados, int *label);
-void RotulaDireita(int **matriz, descMatriz *descritor, info dados, int *label,
+void Rotula(int **matriz, descMatriz *descritor, info *dados, int *label);
+void RotulaDireita(int **matriz, descMatriz *descritor, info *dados, int *label,
                    struct pilha *descritorPilha);
-void RotulaEsquerda(int **matriz, descMatriz *descritor, info dados, int *label,
+void RotulaEsquerda(int **matriz, descMatriz *descritor, info *dados, int *label,
                     struct pilha *descritorPilha);
 
 //======================PILHA=====================
