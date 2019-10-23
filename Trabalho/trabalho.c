@@ -1,6 +1,4 @@
 #include "arq.h"
-#define ANSI_COLOR_RED "\x1b[31m"
-#define ANSI_COLOR_RESET "\x1b[0m"
 
 int main() {
     FILE *arquivoEntrada;
@@ -197,6 +195,8 @@ void PrintMatrizCenterMass(int *matriz, descMatriz *descritor) {
         }
         printf("\n");
     }
+
+    printf("Centro de Massa = [%d, %d]\n", lin, col);
 }
 
 void printFile(FILE *f, descMatriz descritor, int *matriz) {
