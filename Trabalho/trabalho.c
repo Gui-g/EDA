@@ -94,7 +94,6 @@ void Rotula(int **matriz, descMatriz *descritor, info *dados, int *label) {
         Rotular(matriz, descritor, &aux, label, descritorPilha); 
     }
 
-    //baixo
     while(desempilha(&aux, descritorPilha)) {
             i = aux.x;
             j = aux.y;
@@ -107,22 +106,28 @@ void Rotula(int **matriz, descMatriz *descritor, info *dados, int *label) {
                 }
             }
 
-            if(*(*(matriz) + (i-1)*descritor->col + j) == 1) {
-                aux.x = i-1;
-                aux.y = j;
-                Rotular(matriz, descritor, &aux, label, descritorPilha); 
+            if(i-1 >= 0){
+                if(*(*(matriz) + (i-1)*descritor->col + j) == 1) {
+                    aux.x = i-1;
+                    aux.y = j;
+                    Rotular(matriz, descritor, &aux, label, descritorPilha); 
+                }
             }
 
-            if(*(*(matriz) + i*descritor->col + (j-1)) == 1) {
-                aux.x = i;
-                aux.y = j-1;
-                Rotular(matriz, descritor, &aux, label, descritorPilha); 
+            if(j-1 >= 0){
+                if(*(*(matriz) + i*descritor->col + (j-1)) == 1) {
+                    aux.x = i;
+                    aux.y = j-1;
+                    Rotular(matriz, descritor, &aux, label, descritorPilha); 
+                }
             }
 
-            if(*(*(matriz) + i*descritor->col + (j+1)) == 1) {
-                aux.x = i;
-                aux.y = j+1;
-                Rotular(matriz, descritor, &aux, label, descritorPilha); 
+            if(j+1 < descritor->col){
+                if(*(*(matriz) + i*descritor->col + (j+1)) == 1) {
+                    aux.x = i;
+                    aux.y = j+1;
+                    Rotular(matriz, descritor, &aux, label, descritorPilha); 
+                }
             }
     }
 
