@@ -98,8 +98,17 @@ void Rotula(int **matriz, descMatriz *descritor, info *dados, int *label) {
     while(desempilha(&aux, descritorPilha)) {
             i = aux.x;
             j = aux.y;
-            if(*(*(matriz) + (i+1)*descritor->col + j) == 1) {
-                aux.x = i+1;
+
+            if(i+1 < descritor->row){
+                if(*(*(matriz) + (i+1)*descritor->col + j) == 1) {
+                    aux.x = i+1;
+                    aux.y = j;
+                    Rotular(matriz, descritor, &aux, label, descritorPilha); 
+                }
+            }
+
+            if(*(*(matriz) + (i-1)*descritor->col + j) == 1) {
+                aux.x = i-1;
                 aux.y = j;
                 Rotular(matriz, descritor, &aux, label, descritorPilha); 
             }
@@ -139,8 +148,8 @@ int AcharMaior (int **matriz, descMatriz *descritor, int *label){
     num = 2;
     max = 2;
     maxquant = 0;
-    quant = 0;
     for(i=2;i<=*label;i++) {
+        quant = 0;
         for(j=0;j<descritor->num;j++){
             if(*(*(matriz) + j) == num) 
                 quant++;
@@ -186,7 +195,9 @@ void PrintMatrizCenterMass(int *matriz, descMatriz *descritor) {
     for (i = 0; i < descritor->row; i++) {
         for (j = 0; j < descritor->col; j++) {
             if(i == lin && j == col)
-                printf(ANSI_COLOR_RED "%2d " ANSI_COLOR_RESET, matriz[i * descritor->col + j]);
+                printf(ANSI_COLOR_CENTER "%2d " ANSI_COLOR_RESET, matriz[i * descritor->col + j]);
+            else if (matriz[i * descritor->col + j] == 1)
+                printf(ANSI_COLOR_OBJ "%2d " ANSI_COLOR_RESET, matriz[i * descritor->col + j]);
             else
                 printf("%2d ", matriz[i * descritor->col + j]);
         }

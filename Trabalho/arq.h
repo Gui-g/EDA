@@ -2,7 +2,8 @@
 #include "stdlib.h"
 #include "string.h"
 
-#define ANSI_COLOR_RED "\x1b[31m"
+#define ANSI_COLOR_CENTER "\x1b[31m"
+#define ANSI_COLOR_OBJ "\x1b[34m"
 #define ANSI_COLOR_RESET "\x1b[0m"
 
 typedef struct coord {
