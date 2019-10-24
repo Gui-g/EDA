@@ -19,12 +19,9 @@ int main() {
     maiorlabel = AcharMaior(&matriz, descritor, &label);
     MatrizFinal(&matriz, descritor, &maiorlabel);
     PrintMatrizCenterMass(matriz,descritor);
-
-    if(label) {
-        arquivoSaida = fopen("saida.txt", "w+");
-        printFile(arquivoSaida, *descritor, matriz);
-        fclose(arquivoSaida);
-    }
+    arquivoSaida = fopen("saida.txt", "w+");
+    printFile(arquivoSaida, *descritor, matriz);
+    fclose(arquivoSaida);
 
     return 0;
 }
