@@ -8,9 +8,9 @@ int main() {
     int label = 1, maiorlabel;
 
     arquivoEntrada = fopen("entrada.txt", "r");
-
     inicializaDescritor(&descritor);
     matriz = CriarMatriz(arquivoEntrada, &descritor);
+    fclose(arquivoEntrada);
     PrintMatriz(matriz, descritor);
     printf("------------------------------------------------------ || ----------------------------------------------------------\n");
     RotularMatriz(&matriz, descritor, &label);
