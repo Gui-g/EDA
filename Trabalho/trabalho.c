@@ -23,6 +23,9 @@ int main() {
     printFile(arquivoSaida, *descritor, matriz);
     fclose(arquivoSaida);
 
+    free(descritor);
+    free(matriz);
+
     return 0;
 }
 
@@ -131,6 +134,7 @@ void Rotula(int **matriz, descMatriz *descritor, info *dados, int *label) {
             }
     }
 
+    descritorPilha = destroi(descritorPilha);
 }
 
 void Rotular(int **matriz, descMatriz *descritor, info *dados, int *label,
